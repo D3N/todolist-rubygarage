@@ -1,0 +1,112 @@
+<!-- <br/>
+<div>
+	<p id="righty"><%= link_to "Edit", edit_project_path(@project) %>
+	<%= link_to "Delete", @project, method: :delete, data: { confirm: "Are you sure?" } %></p>
+	<h1><%= @project.name %></h1>
+</div>
+<br/>
+<br/>
+<br/>
+<table>
+	<tr>
+		<th>Task:</th>
+		<th>Status:</th>
+		<th class="ed"><span class="glyphicon glyphicon-pencil"></span></th>
+		<th class="del"><span class="glyphicon glyphicon-trash"></span></th>
+	</tr>
+
+		<% @project.tasks.all.each do |i| %>
+	<tr>
+		<td><%= i.name %></td>
+		<td><%= i.status %></td>
+		<td><%= button_to "Edit", edit_project_task_path(i.project, i), :method => :get %></td>
+		<td><%= button_to "Delete", [i.project, i], method: :delete, data: { confirm: "Are you sure?" } %></td>
+				<% end %>
+	</tr>
+</table>
+
+<h3>Add new task:</h3>
+<%= form_with(model: [ @project, @project.tasks.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+	</p>
+	<br/>
+	<p>
+    Priority:<br/>
+		<%= form.radio_button(:status, "High") %>
+    <%= label_tag(:status, "High") %><br/>
+    <%= form.radio_button(:status, "Medium") %>
+    <%= label_tag(:status, "Medium") %><br/>
+    <%= form.radio_button(:status, "Low") %>
+    <%= label_tag(:status, "Low") %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<br/><%= link_to 'Main menu', projects_path %>
+<br/>
+<br/>
+<br/>
+<br/> -->
+
+
+
+
+
+
+
+
+<br/>
+<div>
+	<p id="righty"><%= link_to "Edit", edit_project_path(@project) %>
+	<%= link_to "Delete", @project, method: :delete, data: { confirm: "Are you sure?" } %></p>
+	<h1><%= @project.name %></h1>
+</div>
+<br/>
+<br/>
+<br/>
+<table>
+	<tr>
+		<th>Task:</th>
+		<th>Status:</th>
+		<th class="ed"><span class="glyphicon glyphicon-pencil"></span></th>
+		<th class="del"><span class="glyphicon glyphicon-trash"></span></th>
+	</tr>
+
+		<% @project.tasks.all.each do |tk| %>
+	<tr>
+		<td><%= tk.name %></td>
+		<td><%= tk.status %></td>
+		<td><%= button_to "Edit", edit_project_task_path(tk.project, tk), :method => :get %></td>
+		<td><%= button_to "Delete", [tk.project, tk], method: :delete, data: { confirm: "Are you sure?" } %></td>
+				<% end %>
+	</tr>
+</table>
+
+<h3>Add new task:</h3>
+<%= form_with(model: [ @project, @project.tasks.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+	</p>
+	<br/>
+	<p>
+    Priority:<br/>
+		<%= form.radio_button(:status, "Done") %>
+    <%= label_tag(:status, "Done") %><br/>
+    <%= form.radio_button(:status, "Undone") %>
+    <%= label_tag(:status, "Undone") %><br/>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<br/><%= link_to 'Main menu', projects_path %>
+<br/>
+<br/>
+<br/>
+<br/>
