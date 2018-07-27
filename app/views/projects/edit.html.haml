@@ -10,7 +10,7 @@
 		.new-list.column-between-center(style="width: 800px")
 			= form_for @project do |form|
 				%h6.row-center-center List's name:
-				%p= form.text_field :name, size: 69, :id => "add_list_field"
+				%p= form.text_field :name, size: 69, :id => "add_list_field", required: true, minlength: 3
 				%br
 				.row-center-center
 					%p= form.submit "  Save  ", :id => "create_todo"

@@ -12,7 +12,7 @@
       = form_for [@project, @task] do |form|
         .column-center-center
           %h6 Task's name:
-          %p= form.text_field :name, size: 69, :id => "add_list_field"
+          %p= form.text_field :name, size: 69, :id => "add_list_field", required: true, minlength: 3
         %br
         .column-center-center
           %h6 Choose deadline, if needed:

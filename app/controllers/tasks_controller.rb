@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     if @project.tasks.length == 1
       @task.priority = 1
     else
-      @task.priority = @project.tasks.order(:priority).first.priority - 1
+      @task.priority = @project.tasks.last_task_priority
     end
     @task.save
     redirect_to root_path(@project)

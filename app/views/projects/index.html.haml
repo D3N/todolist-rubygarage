@@ -2,51 +2,51 @@
 
 .w100.h100
 
-	.column-start-center(style="height: 200px")
+	.father.column-start-center
 		%h1 SIMPLE TODO LISTS
 		%h6 FROM RUBY GARAGE
 
 	.column-start-center.w100
 
-		.lists.column-start-start(style="width: 800px")
+		.lists.column-start-start
 			
 
 			- @projects.each do |pr|
 
 				.one-list.w100.h100
-					.list-header.row-between-center.w100(style="height: 50px")
-						%i.glyphicon.glyphicon-list-alt(style="width: 7%; color: #142841")
-						.row-start-center(style="width: 73%")= pr.name
-						.header-btn.row-end-center(style="width: 20%")
+					.list-header.row-between-center.w100
+						%i.glyphicon.glyphicon-list-alt
+						.pr-name.row-start-center= pr.name
+						.header-btn.row-end-center
 							= link_to "<i class=\"btn glyphicon glyphicon-pencil\" style=\"color:#96b4dc\"></i>".html_safe, edit_project_path(pr), :method => :get
 							= link_to "<i class=\"btn glyphicon glyphicon-trash\" style=\"color:#96b4dc\"></i>".html_safe, pr, method: :delete, data: { confirm: "Are you sure?" }
-					.add-task.row-stretch-center.w100(style="height: 50px")
+					.add-task.row-stretch-center.w100
 						= form_with(model: [ pr, pr.tasks.build ], local: true) do |form|
 							.row-start-center
-								.glyphicon.glyphicon-plus(style="width: 5%; font-size:22px; color:#5e826e")
-								= form.text_field :name, size: 72, :id => "add_task_field"
+								.glyphicon.glyphicon-plus
+								= form.text_field :name, size: 72, :id => "add_task_field", required: true, minlength: 3
 								= form.submit "  Add task  ", :id => "add_task_btn"
 						%br/
 						%br/
 					.tasks-list.wrap-column-start-start.w100
 						- pr.tasks.all.order(:priority).each do |tk|
-							.one-task.wrap-row-between-center.w100(style="height: 50px")
-								.status-bar.row-start-center.w100.h100(style="width: 6%")
+							.one-task.wrap-row-between-center.w100
+								.status-bar.row-start-center.w100.h100
 									= form_tag tk.status, :method => :put do
 										= check_box_tag "task_id", tk.id, (tk.status == 'done'), {:id => pr.id, class: 'checkbox'}
-								.task-name-field.row-start-center.w100.h100(style="width: 62%")
+								.task-name-field.row-start-center.w100.h100
 									- if (tk.status == 'done')
 										%s= tk.name 
 									-else
 										= tk.name
-								.row-end-center.deadline(style="width: 20%") 
-									.deadnum(style="height: 25px; width: 140px") 
+								.row-end-center.deadline 
+									.deadnum 
 										- if (tk.status == 'done')
 											%s= tk.deadline
 										-else
 											= tk.deadline
-								.task-btn.row-end-center.w100.h100(style="width: 12%")
-									.up-n-down-btn.column-start-start(style="width: 35%")
+								.task-btn.row-end-center.w100.h100
+									.up-n-down-btn.column-start-start
 										= link_to "<i class=\"btn fa fa-caret-up btn-xs\"></i>".html_safe, shift_up_path(tk.project, tk), :method => :post
 										= link_to "<i class=\"btn fa fa-caret-down btn-xs\"></i>".html_safe, shift_down_path(tk.project, tk), :method => :post
 									= link_to "<i class=\"btn glyphicon glyphicon-pencil btn-xs\"></i>".html_safe, edit_project_task_path(tk.project, tk), :method => :get 
@@ -54,11 +54,9 @@
 				%br/
 				%br/
 		.add-list-btn.column-start-center.w100
-			= link_to "<i class=\"glyphicon glyphicon-plus\" style=\"color:#324664\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"		
+			= link_to "<i class=\"fas fa-plus\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"		
 			%br/
 			%br/
 			#rubygarage © Ruby Garage
 			%br/
 			%br/
-
-
