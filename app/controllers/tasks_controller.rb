@@ -40,8 +40,8 @@ class TasksController < ApplicationController
   def priority_up_shifter
     @task = Task.find(params[:id])
     n = @task.priority
-    if @task_2 = Task.find_by(priority:n-1) != nil
-      @task_2 = Task.find_by(priority:n-1)
+    if @task_2 = Task.find_by(priority: n - 1) != nil
+      @task_2 = Task.find_by(priority: n - 1)
       @task.priority = @task.priority - 1
       @task_2.priority = @task_2.priority + 1
       @task.save
@@ -53,8 +53,8 @@ class TasksController < ApplicationController
   def priority_down_shifter
     @task = Task.find(params[:id])
     n = @task.priority
-    if @task_2 = Task.find_by(priority:n+1) != nil
-      @task_2 = Task.find_by(priority:n+1)
+    if @task_2 = Task.find_by(priority: n + 1) != nil
+      @task_2 = Task.find_by(priority: n + 1)
       @task.priority = @task.priority + 1
       @task_2.priority = @task_2.priority - 1
       @task.save
