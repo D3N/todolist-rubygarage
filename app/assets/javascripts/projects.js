@@ -46,4 +46,15 @@ window.onload = function() {
       cb[i].onclick = doneLauncher
     }
   }
+
+  var tasks = $('.one-task');
+
+  for (var i = 0; i < tasks.length; i++) {
+    tasks[i].onmouseover = function () {
+      this.style.background = "#fdfdd9"
+    }
+    tasks[i].onmouseout = function () {
+      this.style.background = "white"
+    }
+  }
 }
