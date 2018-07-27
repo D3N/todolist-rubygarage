@@ -7,13 +7,7 @@ class TasksController < ApplicationController
 	end
 
 	def create
-    @task = @project.tasks.create(task_params)
-    if @project.tasks.length == 1
-      @task.priority = 1
-    else
-      @task.priority = @project.tasks.last_task_priority
-    end
-    @task.save
+    @project.tasks.create(task_params.merge(priority: @project.tasks.length))
     redirect_to root_path(@project)
 	end
 
@@ -38,32 +32,36 @@ class TasksController < ApplicationController
   end
 
   def priority_up_shifter
-    @task = Task.find(params[:id])
-    n = @task.priority
-    if @task_2 = Task.find_by(priority: n - 1) != nil
-      @task_2 = Task.find_by(priority: n - 1)
-      @task.priority = @task.priority - 1
-      @task_2.priority = @task_2.priority + 1
-      @task.save
-      @task_2.save
-    end
+    shifter(:up)
     redirect_to root_path(@project)
   end
 
   def priority_down_shifter
-    @task = Task.find(params[:id])
-    n = @task.priority
-    if @task_2 = Task.find_by(priority: n + 1) != nil
-      @task_2 = Task.find_by(priority: n + 1)
-      @task.priority = @task.priority + 1
-      @task_2.priority = @task_2.priority - 1
-      @task.save
-      @task_2.save
-    end
+    shifter(:down)
     redirect_to root_path(@project)
   end
 
+
+
 	private
+
+  def shifter(direction)
+    @task = Task.find(params[:id])
+    @pair_new_priority = @task.priority
+
+    case direction
+    when :up
+      @pair_object_priority = @task.priority + 1
+    when :down
+      @pair_object_priority = @task.priority - 1
+    end
+    @pair_object = Task.find_by(project_id: @task.project_id, priority: @pair_object_priority)
+    
+    if @pair_object
+      @task.update(priority: @pair_object.priority)
+      @pair_object.update(priority: @pair_new_priority)
+    end
+  end
 
 	def task_params
     params.require(:task).permit(:name, :status, :priority, :deadline)

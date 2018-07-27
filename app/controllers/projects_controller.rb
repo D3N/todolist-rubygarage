@@ -15,8 +15,7 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.create(project_params)
-		if
-			@project.save
+		if @project.save
 			redirect_to action: 'index'
 		else
 			render 'projects/new'
@@ -25,8 +24,7 @@ class ProjectsController < ApplicationController
 
 	def update
 		@project.update(project_params)
-		if
-			@project.save
+		if @project.save
 			redirect_to action: 'index'
 		else
 			render 'edit'
