@@ -77,17 +77,13 @@ body {
   color:#5e826e;
 }
 
-.fa-plus {
-  color:#324664;
-}
-
 .pr-name {
   width: 73%;
 }
 
-.tasks-list {
-  color: grey;
-}
+// .tasks-list {
+//   color: grey;
+// }
 
 .header-btn {
   color: #4a69a5;
@@ -103,6 +99,14 @@ body {
   border-left: solid 1px grey;
   color: grey;
 }
+
+span {
+  color: grey;
+}
+
+// .fa {
+//   color: grey;
+// }
 
 .task-name-field {
   width: 62%;
@@ -123,6 +127,7 @@ body {
 .task-btn {
   width: 12%;
   padding: 10px;
+  color: inherit !important;
 }
 
 .status-bar {
@@ -134,22 +139,6 @@ body {
   border: solid 1px grey;
   background: linear-gradient(#dfdfdf, #a0a0a0);
 }
-
-.glyphicon-pencil {
-  color: grey;
-}
-
-.glyphicon-trash {
-  color: grey;
-}
-
-.fa {
-  color: grey;
-}
-
-// .one-task:hover {
-//   background-color:#fdfdd9;
-// }
 
 .one-task:last-child {
   border-bottom-left-radius: 15px;
@@ -183,7 +172,9 @@ body {
 
 #add_list_btn {
   color: white;
-  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  padding: 8px;
   background: linear-gradient(#577eb1, #3d5c84);
 }
 

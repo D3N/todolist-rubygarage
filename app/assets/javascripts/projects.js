@@ -37,7 +37,6 @@ window.onload = function() {
     window.location = window.location;
   }
 
-
   for (var i = 0; i < cb.length; i++) {
     if (cb[i].checked) {
       cb[i].onclick = undoneLauncher

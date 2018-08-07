@@ -2,26 +2,26 @@ class TasksController < ApplicationController
 
   before_action :project_id_finder
 
-	def edit
+  def edit
     @task = @project.tasks.find(params[:id])
-	end
+  end
 
-	def create
+  def create
     @project.tasks.create(task_params.merge(priority: @project.tasks.length))
     redirect_to root_path(@project)
-	end
+  end
 
-	def update
+  def update
     @task = Task.find(params[:id])
     @task.update(task_params)
     redirect_to root_path(@project)
-	end
+  end
 
-	def destroy
+  def destroy
     @task = @project.tasks.find(params[:id])
     @task.destroy
     redirect_to root_path(@project)
-	end
+  end
 
   def task_done
     @task = @project.tasks.find(params[:id])
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
 
 
-	private
+  private
 
   def shifter(direction)
     @task = Task.find(params[:id])
@@ -63,9 +63,9 @@ class TasksController < ApplicationController
     end
   end
 
-	def task_params
+  def task_params
     params.require(:task).permit(:name, :status, :priority, :deadline)
-	end
+  end
 
   def project_id_finder
     @project = Project.find(params[:project_id])

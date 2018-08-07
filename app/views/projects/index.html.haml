@@ -47,14 +47,14 @@
 											= tk.deadline
 								.task-btn.row-end-center.w100.h100
 									.up-n-down-btn.column-start-start
-										= link_to "<i class=\"btn fa fa-caret-up btn-xs\"></i>".html_safe, shift_up_path(tk.project, tk), :method => :post
-										= link_to "<i class=\"btn fa fa-caret-down btn-xs\"></i>".html_safe, shift_down_path(tk.project, tk), :method => :post
-									= link_to "<i class=\"btn glyphicon glyphicon-pencil btn-xs\"></i>".html_safe, edit_project_task_path(tk.project, tk), :method => :get 
-									= link_to "<i class=\"btn glyphicon glyphicon-trash btn-xs\"></i>".html_safe, [tk.project, tk], method: :delete, data: { confirm: "Are you sure?" }
+										= link_to "<span class=\"btn fa fa-caret-up btn-xs\"></span>".html_safe, shift_up_path(tk.project, tk), :method => :post
+										= link_to "<span class=\"btn fa fa-caret-down btn-xs\"></span>".html_safe, shift_down_path(tk.project, tk), :method => :post
+									= link_to "<span class=\"btn fa fa-pencil btn-xs\"></span>".html_safe, edit_project_task_path(tk.project, tk), :method => :get 
+									= link_to "<span class=\"btn fa fa-trash btn-xs\"></span>".html_safe, [tk.project, tk], method: :delete, data: { confirm: "Are you sure?" }
 				%br/
 				%br/
 		.add-list-btn.column-start-center.w100
-			= link_to "<i class=\"fas fa-plus\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"		
+			= link_to "<i class=\"glyphicon glyphicon-plus\" style=\"color:#324664; width: 30px\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"		
 			%br/
 			%br/
 			#rubygarage © Ruby Garage
