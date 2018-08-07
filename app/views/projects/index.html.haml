@@ -2,6 +2,10 @@
 
 .w100.h100
 
+  - if flash[:error]
+    .error.w100.row-center-center
+      %h4= flash[:error]
+
   .father.column-start-center
     %h1 SIMPLE TODO LISTS
     %h6 FROM RUBY GARAGE
@@ -59,4 +63,3 @@
       #rubygarage © Ruby Garage
       %br/
       %br/
-      

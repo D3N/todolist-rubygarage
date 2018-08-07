@@ -7,14 +7,26 @@ class TasksController < ApplicationController
   end
 
   def create
-    @project.tasks.create(task_params.merge(priority: @project.tasks.length))
-    redirect_to root_path(@project)
+    @task = @project.tasks.create(task_params.merge(priority: @project.tasks.length))
+    if @task.save
+      redirect_to root_path(@project)
+    else
+      @task.valid?
+      @task.errors.messages
+      redirect_to root_path(@project), :flash => { :error => "#{@task.errors.messages}" }
+    end
   end
 
   def update
     @task = Task.find(params[:id])
     @task.update(task_params)
-    redirect_to root_path(@project)
+    if @task.save
+      redirect_to root_path(@project)
+    else
+      @task.valid?
+      @task.errors.messages
+      redirect_to edit_project_task_path(@project), :flash => { :error => "#{@task.errors.messages}" }
+    end
   end
 
   def destroy

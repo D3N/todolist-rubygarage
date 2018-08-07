@@ -1,6 +1,10 @@
 
 .w100.h100
 
+  - if flash[:error]
+    .error.w100.row-center-center
+      %h4= flash[:error]
+
   .column-center-center
 
     %br
