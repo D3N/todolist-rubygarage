@@ -12,7 +12,6 @@ class TasksController < ApplicationController
       redirect_to root_path(@project)
     else
       @task.valid?
-      @task.errors.messages
       redirect_to root_path(@project), :flash => { :error => "#{@task.errors.messages}" }
     end
   end
@@ -24,7 +23,6 @@ class TasksController < ApplicationController
       redirect_to root_path(@project)
     else
       @task.valid?
-      @task.errors.messages
       redirect_to edit_project_task_path(@project), :flash => { :error => "#{@task.errors.messages}" }
     end
   end

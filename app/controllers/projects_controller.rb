@@ -19,7 +19,6 @@ class ProjectsController < ApplicationController
       redirect_to action: 'index'
     else
       @project.valid?
-      @project.errors.messages
       redirect_to new_project_path(@project), :flash => { :error => "#{@project.errors.messages}" }
     end
   end
@@ -30,7 +29,6 @@ class ProjectsController < ApplicationController
       redirect_to action: 'index'
     else
       @project.valid?
-      @project.errors.messages
       redirect_to edit_project_path(@project), :flash => { :error => "#{@project.errors.messages}" }
     end
   end
