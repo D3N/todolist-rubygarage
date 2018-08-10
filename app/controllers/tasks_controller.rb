@@ -11,8 +11,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_path(@project)
     else
-      @task.valid?
-      redirect_to root_path(@project), :flash => { :error => "#{@task.errors.messages}" }
+      redirect_to root_path(@project), :flash => { :error => @task.errors.full_messages }
     end
   end
 
@@ -22,8 +21,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_path(@project)
     else
-      @task.valid?
-      redirect_to edit_project_task_path(@project), :flash => { :error => "#{@task.errors.messages}" }
+      redirect_to edit_project_task_path(@project), :flash => { :error => @task.errors.full_messages }
     end
   end
 

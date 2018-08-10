@@ -18,8 +18,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to action: 'index'
     else
-      @project.valid?
-      redirect_to new_project_path(@project), :flash => { :error => "#{@project.errors.messages}" }
+      redirect_to new_project_path(@project), :flash => { :error => @project.errors.full_messages }
     end
   end
 
@@ -28,8 +27,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to action: 'index'
     else
-      @project.valid?
-      redirect_to edit_project_path(@project), :flash => { :error => "#{@project.errors.messages}" }
+      redirect_to edit_project_path(@project), :flash => { :error => @project.errors.full_messages }
     end
   end
 

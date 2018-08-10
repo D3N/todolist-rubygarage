@@ -1,8 +1,9 @@
 .w100.h100
 
   - if flash[:error]
-    .error.w100.row-center-center
-      %h4= flash[:error]
+    - flash.each do |atr,ms|
+      .error.w100.row-center-center
+        %h4= ms.join(",")
 
   .column-center-center
 
@@ -14,7 +15,7 @@
     .new-list.column-between-center(style="width: 800px")
       = form_for @project do |form|
         %p List's name:
-        %p= form.text_field :name, size: 69, :id => "add_list_field"
+        %p= form.text_field :name, size: 69, :id => "add_list_field", required: true, minlength: 3, maxlength: 50
         %br
         .row-center-center
           %p= form.submit "  Create TODO list  ", :id => "create_todo"
