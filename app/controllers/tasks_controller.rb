@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @project.tasks.create(task_params.merge(priority: @project.tasks.length))
+    @task = @project.tasks.create(task_params)
     if @task.save
       redirect_to root_path(@project)
     else
@@ -40,36 +40,21 @@ class TasksController < ApplicationController
   end
 
   def priority_up_shifter
-    shifter(:up)
+    @task = @project.tasks.find(params[:id])
+    @task.move_higher
     redirect_to root_path(@project)
   end
 
   def priority_down_shifter
-    shifter(:down)
+    @task = @project.tasks.find(params[:id])
+    @task.move_lower
     redirect_to root_path(@project)
   end
 
 
 
   private
-
-  def shifter(direction)
-    @task = Task.find(params[:id])
-    @pair_new_priority = @task.priority
-
-    case direction
-    when :up
-      @pair_object_priority = @task.priority + 1
-    when :down
-      @pair_object_priority = @task.priority - 1
-    end
-    @pair_object = Task.find_by(project_id: @task.project_id, priority: @pair_object_priority)
-    
-    if @pair_object
-      @task.update(priority: @pair_object.priority)
-      @pair_object.update(priority: @pair_new_priority)
-    end
-  end
+  
 
   def task_params
     params.require(:task).permit(:name, :status, :priority, :deadline)

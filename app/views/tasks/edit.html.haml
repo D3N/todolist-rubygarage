@@ -4,7 +4,7 @@
   - if flash[:error]
     - flash.each do |atr,ms|
       .error.w100.row-center-center
-        %h4= ms.join(",")
+        %h4= ms.join(", ")
 
   .column-center-center
 
@@ -17,7 +17,7 @@
       = form_for [@project, @task] do |form|
         .column-center-center
           %h6 Task's name:
-          %p= form.text_field :name, size: 69, :id => "add_list_field", required: true, minlength: 3, maxlength: 60
+          %p= form.text_field :name, size: 69, :id => "add_list_field", required: true, minlength: 3, maxlength: 60, pattern: ".*[^ ].*"
         %br
         .column-center-center
           %h6 Choose deadline, if needed:

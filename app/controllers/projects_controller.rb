@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :project_finder, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.all_projects
+    @projects = Project.all
   end
 
   def new

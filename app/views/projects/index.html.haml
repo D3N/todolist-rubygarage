@@ -5,7 +5,7 @@
   - if flash[:error]
     - flash.each do |atr,ms|
       .error.w100.row-center-center
-        %h4= ms.join(",")
+        %h4= ms.join(", ")
 
   .father.column-start-center
     %h1 SIMPLE TODO LISTS
@@ -28,12 +28,12 @@
             = form_with(model: [ pr, pr.tasks.build ], local: true) do |form|
               .row-start-center
                 .glyphicon.glyphicon-plus
-                = form.text_field :name, size: 72, :id => "add_task_field", required: true, minlength: 3, maxlength: 60
+                = form.text_field :name, size: 72, :id => "add_task_field", required: true, minlength: 3, maxlength: 60, pattern: ".*[^ ].*"
                 = form.submit "  Add task  ", :id => "add_task_btn"
               %br/
               %br/
           .tasks-list.wrap-column-start-start.w100
-            - pr.tasks.all.order(:priority).reverse.each do |tk|
+            - pr.tasks.all.each do |tk|
               .one-task.wrap-row-between-center.w100
                 .status-bar.row-start-center.w100.h100
                   = form_tag tk.status, :method => :put do

@@ -40,6 +40,7 @@ gem 'font-awesome-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'acts_as_list'
 
 
 
