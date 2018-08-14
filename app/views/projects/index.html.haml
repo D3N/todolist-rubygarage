@@ -1,6 +1,6 @@
 
 
-.w100.h100
+.project-page.w100.h100
 
   - if flash[:error]
     - flash.each do |atr,ms|
@@ -37,17 +37,18 @@
               .one-task.wrap-row-between-center.w100
                 .status-bar.row-start-center.w100.h100
                   = form_tag tk.status, :method => :put do
-                    = check_box_tag "task_id", tk.id, (tk.status == 'done'), {:id => pr.id, class: 'checkbox'}
-                .task-name-field.row-start-center.w100.h100
-                  - if (tk.status == 'done')
-                    %s= tk.name 
-                  -else
+                    = check_box_tag "task_id", tk.id, (tk.status == 'done'), {:id => tk.id, class: 'checkbox', onclick: "changeStatus(#{pr.id}, #{tk.id})"}
+                - if (tk.status == 'done')
+                  .task-name-field.task-done.row-start-center.w100.h100(id="#{tk.id}")
                     = tk.name
-                .row-end-center.deadline 
-                  .deadnum 
-                    - if (tk.status == 'done')
-                      %s= tk.deadline
-                    -else
+                  .row-end-center.deadline.task-done
+                    .deadnum 
+                      = tk.deadline
+                - else
+                  .task-name-field.row-start-center.w100.h100(id="#{tk.id}")
+                    = tk.name
+                  .row-end-center.deadline
+                    .deadnum 
                       = tk.deadline
                 .task-btn.row-end-center.w100.h100
                   .up-n-down-btn.column-start-start

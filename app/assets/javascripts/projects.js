@@ -11,38 +11,42 @@
 
 window.onload = function() {
 
-  var cb = document.getElementsByClassName('checkbox');
-
-  doneLauncher = function(){
-    fetch("/projects/"+this.id+"/tasks/"+this.value+"", {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({project_id: this.id, id: this.value, status: "done"})
-    })
-    window.location = window.location;
+  changeStatus = function(project_id, task_id) {
+    fetch(
+      "/projects/" + project_id + "/tasks/" + task_id,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST"
+      }
+    )
+    .then(
+      function(response) { updateUIstatusTask(response, task_id) }
+    )
+    .catch(
+      function(error) { console.log(error) }
+    )
   }
 
-  undoneLauncher = function(){
-    fetch("/projects/"+this.id+"/tasks/"+this.value+"", {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({project_id: this.id, id: this.value, status: "undone"})
-    })
-    window.location = window.location;
-  }
-
-  for (var i = 0; i < cb.length; i++) {
-    if (cb[i].checked) {
-      cb[i].onclick = undoneLauncher
-    }
-    else {
-      cb[i].onclick = doneLauncher
+  updateUIstatusTask = function(response, task_id) {
+    let cb = $('#' + task_id + '.task-name-field')
+    if (response.status == 200 && cb[0]) {
+      response.json().then(
+        function(data) {
+          switch(data.task.status) {
+            case 'done':
+              cb[0].classList.add('task-done');
+              break;
+            case 'undone':
+              cb[0].classList.remove('task-done');
+              break;
+            default:
+              break;
+          }
+        }
+      )
     }
   }
 

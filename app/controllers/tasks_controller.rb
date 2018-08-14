@@ -33,10 +33,13 @@ class TasksController < ApplicationController
 
   def task_done
     @task = @project.tasks.find(params[:id])
-    @task.update(task_params)
-    respond_to do |format|
-      format.js {render inline: "location.reload();" }
-      end
+    status = @task.status == 'done' ? 'undone' : 'done'
+
+    if @task.update(status: status)
+      render json: {task: @task}
+    else
+      redirect_to root_path(@project), :flash => { :error => @task.errors.full_messages }
+    end
   end
 
   def priority_up_shifter
