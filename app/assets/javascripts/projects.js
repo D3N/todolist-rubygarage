@@ -31,7 +31,7 @@ window.onload = function() {
   }
 
   updateUIstatusTask = function(response, task_id) {
-    let cb = $('#' + task_id + '.task-name-field')
+    var cb = $('#' + task_id + '.task-name-field')
     if (response.status == 200 && cb[0]) {
       response.json().then(
         function(data) {
