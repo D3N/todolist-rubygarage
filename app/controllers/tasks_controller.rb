@@ -34,7 +34,6 @@ class TasksController < ApplicationController
   def task_done
     @task = @project.tasks.find(params[:id])
     status = @task.status == 'done' ? 'undone' : 'done'
-
     if @task.update(status: status)
       render json: {task: @task}
     else
@@ -57,7 +56,7 @@ class TasksController < ApplicationController
 
 
   private
-  
+
 
   def task_params
     params.require(:task).permit(:name, :status, :priority, :deadline)

@@ -11,6 +11,7 @@
 
 window.onload = function() {
 
+// task "done" feature
   changeStatus = function(project_id, task_id) {
     fetch(
       "/projects/" + project_id + "/tasks/" + task_id,
@@ -50,6 +51,52 @@ window.onload = function() {
     }
   }
 
+// form for project's name
+  editProject = function (project_id) {
+    var textField = $('#' +  project_id + '.pr-edit')
+    var noTextField = $('#' +  project_id + '.pr-name')
+    noTextField[0].style.display = 'none'
+    textField[0].style.display = 'inline'
+  }
+
+// edit project's name
+
+  updateProjectName = function(project_id) {
+    var name = $('#list' + project_id).val()
+    fetch(
+      "/projects/" + project_id + "/new_name",
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({id:project_id, name: name})
+      }
+    )
+    .then(
+      function(response) { changeProjectName(response, project_id) }
+    )
+    .catch(
+      function(error) { console.log(error) }
+    )
+  }
+
+  changeProjectName = function(response, project_id) {
+    var textField = $('#' +  project_id + '.pr-edit')
+    var noTextField = $('#' +  project_id + '.pr-name')
+    if (response.status == 200) {
+      response.json().then(
+        function(data) {
+          $('#' +  project_id + '.pr-name').text(data.project.name)
+          noTextField[0].style.display = 'inline'
+          textField[0].style.display = 'none'
+        }
+      )
+    }
+  }
+
+// task's backlighting
   var tasks = $('.one-task');
 
   for (var i = 0; i < tasks.length; i++) {

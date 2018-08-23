@@ -5,6 +5,17 @@
 
 .project-page {
   .task-done {
-    text-decoration: line-through;   
+    text-decoration: line-through;
+  }
+
+  .pr-edit {
+    width: 73%;
+    display: none;
+    color: grey;
+  }
+
+  .pr-name {
+    width: 73%;
+    display: inline;
   }
 }

@@ -15,14 +15,18 @@
 
     .lists.column-start-start
 
-      - @projects.each do |pr|
+      - @projects.all.order(:id).each do |pr|
 
         .one-list.w100.h100
           .list-header.row-between-center.w100
             %i.glyphicon.glyphicon-list-alt
-            .pr-name.row-start-center= pr.name
+            .pr-name.row-start-center(id="#{pr.id}")= pr.name
+            .pr-edit.row-start-center(id="#{pr.id}")
+              = form_with(model: pr, url: new_name_path(pr), method: :post, :html => { :onsubmit => "updateProjectName(#{pr.id})"}) do |f|
+                = f.text_field :name, size: 50, :id => "list#{pr.id}", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
+                = link_to "<i class=\"btn glyphicon glyphicon-ok\" style=\"color:#96b4dc\"></i>".html_safe, 'javascript:;', onclick: "updateProjectName(#{pr.id})"
             .header-btn.row-end-center
-              = link_to "<i class=\"btn glyphicon glyphicon-pencil\" style=\"color:#96b4dc\"></i>".html_safe, edit_project_path(pr), :method => :get
+              = link_to "<i class=\"btn glyphicon glyphicon-pencil\" style=\"color:#96b4dc\"></i>".html_safe, 'javascript:;', onclick: "editProject(#{pr.id})"
               = link_to "<i class=\"btn glyphicon glyphicon-trash\" style=\"color:#96b4dc\"></i>".html_safe, pr, method: :delete, data: { confirm: "Are you sure?" }
           .add-task.row-stretch-center.w100
             = form_with(model: [ pr, pr.tasks.build ], local: true) do |form|
@@ -42,24 +46,24 @@
                   .task-name-field.task-done.row-start-center.w100.h100(id="#{tk.id}")
                     = tk.name
                   .row-end-center.deadline.task-done
-                    .deadnum 
+                    .deadnum
                       = tk.deadline
                 - else
                   .task-name-field.row-start-center.w100.h100(id="#{tk.id}")
                     = tk.name
                   .row-end-center.deadline
-                    .deadnum 
+                    .deadnum
                       = tk.deadline
                 .task-btn.row-end-center.w100.h100
                   .up-n-down-btn.column-start-start
                     = link_to "<span class=\"btn fa fa-caret-up btn-xs\"></span>".html_safe, shift_up_path(tk.project, tk), :method => :post
                     = link_to "<span class=\"btn fa fa-caret-down btn-xs\"></span>".html_safe, shift_down_path(tk.project, tk), :method => :post
-                  = link_to "<span class=\"btn fa fa-pencil btn-xs\"></span>".html_safe, edit_project_task_path(tk.project, tk), :method => :get 
+                  = link_to "<span class=\"btn fa fa-pencil btn-xs\"></span>".html_safe, edit_project_task_path(tk.project, tk), :method => :get
                   = link_to "<span class=\"btn fa fa-trash btn-xs\"></span>".html_safe, [tk.project, tk], method: :delete, data: { confirm: "Are you sure?" }
         %br/
         %br/
     .add-list-btn.column-start-center.w100
-      = link_to "<i class=\"glyphicon glyphicon-plus\" style=\"color:#324664; width: 30px\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"		
+      = link_to "<i class=\"glyphicon glyphicon-plus\" style=\"color:#324664; width: 30px\"></i>  Add TODO list".html_safe, new_project_path, :method => :get, :id => "add_list_btn"
       %br/
       %br/
       #rubygarage © Ruby Garage
