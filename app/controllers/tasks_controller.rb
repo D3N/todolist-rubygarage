@@ -53,13 +53,24 @@ class TasksController < ApplicationController
     redirect_to root_path(@project)
   end
 
+  def edit_task
+    @task = @project.tasks.find(params[:id])
+    @task.update(task_params)
+    name = @task.name
+    deadline = @task.deadline
+    if @task.update(name: name, deadline: deadline)
+      render json: { task: @task }
+    else
+      redirect_to root_path, :flash => { :error => @task.errors.full_messages }
+    end
+  end
 
 
   private
 
 
   def task_params
-    params.require(:task).permit(:name, :status, :priority, :deadline)
+    params.require(:task).permit(:id, :name, :status, :priority, :deadline)
   end
 
   def project_id_finder
