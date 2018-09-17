@@ -188,7 +188,7 @@ span {
 }
 
 .tk-edit {
-  width: 650px;
+  width: 653px;
   background: radial-gradient(circle, #eeeeee 5%, #fdfdd9 95%);
   display: none;
 }
@@ -196,7 +196,16 @@ span {
 .tk-edit-name {
   width: 100%;
   height: 50px;
-  padding: 1px;
+  padding: 5px;
+}
+
+.pr-edit-field {
+  width: 90%
+}
+
+.tk-edit-field {
+  font-size: 16px;
+  width: 70%;
 }
 
 #add_list_btn {
@@ -219,6 +228,7 @@ span {
 }
 
 #add_task_field {
+  width: 85%;
   font-size: 18px;
   box-shadow: -1px -1px 10px 0px grey inset;
 }

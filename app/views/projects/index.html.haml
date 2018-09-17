@@ -23,7 +23,7 @@
             .pr-name.row-start-center(id="#{pr.id}")= pr.name
             .pr-edit.row-start-center(id="#{pr.id}")
               = form_with(model: pr, url: new_name_path(pr), method: :post, :html => { :onsubmit => "updateProjectName(#{pr.id})"}) do |f|
-                = f.text_field :name, size: 56, :id => "list#{pr.id}", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
+                = f.text_field :name, :id => "list#{pr.id}", :class => "pr-edit-field", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
                 = link_to "<i class=\"btn glyphicon glyphicon-ok\"></i>".html_safe, 'javascript:;', onclick: "updateProjectName(#{pr.id})"
             .header-btn.row-end-center
               = link_to "<i class=\"btn glyphicon glyphicon-pencil\" style=\"color:#96b4dc\"></i>".html_safe, 'javascript:;', onclick: "editProject(#{pr.id})"
@@ -32,7 +32,7 @@
             = form_with(model: [ pr, pr.tasks.build ], local: true) do |form|
               .row-start-center
                 .glyphicon.glyphicon-plus
-                = form.text_field :name, size: 72, :id => "add_task_field", required: true, minlength: 3, maxlength: 60, pattern: ".*[^ ].*"
+                = form.text_field :name, :id => "add_task_field", required: true, minlength: 3, maxlength: 60, pattern: ".*[^ ].*"
                 = form.submit "  Add task  ", :id => "add_task_btn"
               %br/
               %br/
@@ -50,9 +50,9 @@
                       = tk.deadline
                   .tk-edit.row-start-center.h100(id="#{tk.id}")
                     = form_with(model: [pr, tk], url: edit_task_path(pr, tk), method: :post, :html => { :onsubmit => "updateTaskName(#{pr.id},#{tk.id})", :class => "tk-edit-name row-around-center"}) do |f|
-                      = f.text_field :name, size: 48, :id => "task_new_name#{tk.id}", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
-                      .deadline-edit.row-between-center.input-group.date(id="datetimepicker#{i+1}")
-                        .deadline-form= f.text_field :deadline, size: 22, :id => "task_dead_line#{tk.id}"
+                      = f.text_field :name, :id => "task_new_name#{tk.id}", :class => "tk-edit-field", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
+                      .deadline-edit.row-start-center.input-group.date(id="datetimepicker#{i+1}")
+                        .deadline-form= f.text_field :deadline, :id => "task_dead_line#{tk.id}"
                         .input-group-addon.row-center-center
                           .glyphicon.glyphicon-calendar
                       = link_to "<i class=\"btn glyphicon glyphicon-ok\"></i>".html_safe, 'javascript:;', onclick: "updateTaskName(#{pr.id},#{tk.id})"
@@ -64,9 +64,9 @@
                       = tk.deadline
                   .tk-edit.row-start-center.h100(id="#{tk.id}")
                     = form_with(model: [pr, tk], url: edit_task_path(pr, tk), method: :post, :html => { :onsubmit => "updateTaskName(#{pr.id},#{tk.id})", :class => "tk-edit-name row-around-center"}) do |f|
-                      = f.text_field :name, size: 48, :id => "task_new_name#{tk.id}", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
-                      .deadline-edit.row-between-center.input-group.date(id="datetimepicker#{i+1}")
-                        .deadline-form= f.text_field :deadline, size: 22, :id => "task_dead_line#{tk.id}"
+                      = f.text_field :name, :id => "task_new_name#{tk.id}", :class => "tk-edit-field", required: true, minlength: 3, maxlength: 50, pattern: ".*[^ ].*"
+                      .deadline-edit.row-start-center.input-group.date(id="datetimepicker#{i+1}")
+                        .deadline-form= f.text_field :deadline, :id => "task_dead_line#{tk.id}"
                         .input-group-addon.row-center-center
                           .glyphicon.glyphicon-calendar
                       = link_to "<i class=\"btn glyphicon glyphicon-ok\"></i>".html_safe, 'javascript:;', onclick: "updateTaskName(#{pr.id},#{tk.id})"
